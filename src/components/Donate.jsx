@@ -1,7 +1,7 @@
-function HeartIcon() {
+function PayPalIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.007 8.03c.032-.083.056-.168.072-.257.487-2.73-.396-4.47-2.652-5.22C15.116 1.78 12.016 1.8 9.333 1.8H3.3c-.55 0-1 .45-1 1l-2 18.2c-.06.55.37 1 1 1h4.8l.9-8.1 1.7 1.5c1.6 1.4 3.7 1.8 5.7 1.2 3.6-.9 5.8-3.9 5.6-7.6zM8.333 11.8l.8-7.2h2.7c1.3 0 2.4.1 3.2.7.7.5 1.1 1.4.9 2.5-.3 2.1-1.9 3.9-3.9 4H8.333z" />
     </svg>
   );
 }
@@ -42,14 +42,16 @@ export default function Donate() {
           <div className="donate-options">
             <div className="donate-option-card">
               <div className="donate-option-icon">
-                <HeartIcon />
+                <img src="/brands/paypal.png" alt="PayPal" style={{ height: '32px', objectFit: 'contain', display: 'block', margin: '0 auto' }} />
               </div>
-              <h3>Patreon / Apoyo Mensual</h3>
-              <p>Acceso anticipado a videos, menciones especiales y canal de Discord exclusivo.</p>
+              <h3>Donación con PayPal</h3>
+              <p>Con su donación contribuye a que este sitio se mantenga y entregue mejor contenido.</p>
               <a href="https://www.paypal.com/paypalme/erikbouns" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                Ser Patron
+                Donar con PayPal
               </a>
             </div>
+
+
 
             <div className="donate-option-card highlighted">
               <div className="donate-option-icon">

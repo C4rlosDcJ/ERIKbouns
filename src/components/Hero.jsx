@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import heroBg from '../assets/hero-bg.png';
 
 const TYPED_WORDS = ['calidad', 'experiencia', 'pasion', 'precision'];
@@ -31,6 +31,66 @@ function useTypingEffect(words, typingSpeed = 100, deletingSpeed = 60, pauseTime
   }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseTime]);
 
   return text;
+}
+
+function StatsCounter({ endValue, label, prefix = "", suffix = "" }) {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    const end = parseInt(endValue, 10);
+    if (isNaN(end)) {
+      setCount(endValue);
+      return;
+    }
+
+    let start = 0;
+    const duration = 1500; // ms
+    const increment = Math.ceil(end / (duration / 16));
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        clearInterval(timer);
+        setCount(end);
+      } else {
+        setCount(start);
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [hasStarted, endValue]);
+
+  return (
+    <div className="hero-stat" ref={elementRef}>
+      <div className="hero-stat-value">
+        {prefix}
+        {count}
+        {suffix}
+      </div>
+      <div className="hero-stat-label">{label}</div>
+    </div>
+  );
 }
 
 export default function Hero() {
@@ -81,20 +141,11 @@ export default function Hero() {
         </div>
 
         <div className="hero-stats fade-in fade-in-delay-4">
-          <div className="hero-stat">
-            <div className="hero-stat-value">+10</div>
-            <div className="hero-stat-label">Años de experiencia</div>
-          </div>
+          <StatsCounter endValue="10" label="Años de experiencia" prefix="+" />
           <div className="hero-stat-divider"></div>
-          <div className="hero-stat">
-            <div className="hero-stat-value">2013</div>
-            <div className="hero-stat-label">Año de fundacion</div>
-          </div>
+          <StatsCounter endValue="2013" label="Año de fundacion" />
           <div className="hero-stat-divider"></div>
-          <div className="hero-stat">
-            <div className="hero-stat-value">ONEFIX</div>
-            <div className="hero-stat-label">Marca de reparacion</div>
-          </div>
+          <StatsCounter endValue="ONEFIX" label="Marca de reparacion" />
         </div>
       </div>
 
@@ -104,3 +155,4 @@ export default function Hero() {
     </section>
   );
 }
+

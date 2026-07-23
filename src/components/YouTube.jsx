@@ -1,56 +1,91 @@
-import { useState, useRef } from 'react';
-import thumbReview from '../assets/yt-review.png';
-import thumbTutorial from '../assets/yt-tutorial.png';
-import thumbGadgets from '../assets/yt-gadgets.png';
+import { useState, useRef, useEffect } from 'react';
 
 const FEATURED_VIDEOS = [
   {
-    id: 'shorts-oppo',
-    title: 'La camara de OPPO que nadie esperaba -- Comparativa real en condiciones extremas',
+    id: 'cable-displayport',
+    title: 'Este Cable Display Port Cambio la Calidad de Imagen',
     category: 'Review',
-    image: thumbReview,
-    views: '12.5K vistas',
+    views: '138 vistas',
+    youtubeId: 'bRZ9ci5_Vig',
   },
   {
-    id: 'tutorial-windows',
-    title: 'Como optimizar Windows para maximo rendimiento sin perder estabilidad',
-    category: 'Tutorial',
-    image: thumbTutorial,
-    views: '45.2K vistas',
+    id: 'pc-gamer-mercadolibre',
+    title: 'PC Gamer - Accesorios Baratos Mercado Libre (Paneles 3D)',
+    category: 'Accesorios',
+    views: '132 vistas',
+    youtubeId: 'WwFR05piCrQ',
   },
   {
-    id: 'review-gadgets',
-    title: 'Los mejores gadgets tecnologicos imprescindibles para tu escritorio',
-    category: 'Unboxing',
-    image: thumbGadgets,
-    views: '28.9K vistas',
+    id: 'pc-gamer-aliexpress',
+    title: 'PC Gamer - Accesorios Gamer Aliexpress',
+    category: 'Gadgets',
+    views: '557 vistas',
+    youtubeId: 'z6Ai_lBAjPk',
   },
   {
-    id: 'config-movil',
-    title: 'Trucos ocultos de configuracion para tu smartphone que deberias activar hoy',
-    category: 'Tips',
-    image: thumbReview,
-    views: '18.4K vistas',
+    id: 'cooler-master-mf120',
+    title: 'Cooler Master MF120 Halo - Ventilador Gamer Barato',
+    category: 'Hardware',
+    views: '1.2K vistas',
+    youtubeId: 'O4AFk6IkCSw',
   },
   {
-    id: 'noticias-tech',
-    title: 'Noticias de tecnologia: Lo mas relevante de la semana sintetizado',
-    category: 'Noticias',
-    image: thumbTutorial,
-    views: '15.1K vistas',
+    id: 'peores-samsung',
+    title: 'Peores Celulares de Samsung que debes conocer',
+    category: 'Samsung',
+    views: '2.1K vistas',
+    youtubeId: 'p_VdOnMrXtA',
   },
   {
-    id: 'unboxing-acc',
-    title: 'Unboxing de accesorios tech: Evaluamos si realmente valen la pena',
-    category: 'Unboxing',
-    image: thumbGadgets,
-    views: '32.0K vistas',
+    id: 'celular-antiguo-vs-moderno',
+    title: 'Celular Antiguo 2011 VS Celular Moderno 2024 / BlackBerry',
+    category: 'Comparativa',
+    views: '564 vistas',
+    youtubeId: 'opsNaKLpr3Q',
   },
 ];
+
 
 export default function YouTube() {
   const carouselRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [activeVideoId, setActiveVideoId] = useState(null);
+  const [videoViews, setVideoViews] = useState({});
+
+  useEffect(() => {
+    FEATURED_VIDEOS.forEach((video) => {
+      const targetUrl = `https://www.youtube.com/watch?v=${video.youtubeId}`;
+      fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`)
+        .then((response) => {
+          if (response.ok) return response.json();
+          throw new Error('Network response was not ok.');
+        })
+        .then((data) => {
+          const html = data.contents;
+          // Look for interactionCount meta tag
+          const match = html.match(/<meta itemprop="interactionCount" content="(\d+)">/);
+          let rawCount = match ? match[1] : null;
+          if (!rawCount) {
+            const match2 = html.match(/"viewCount":"(\d+)"/);
+            rawCount = match2 ? match2[1] : null;
+          }
+          if (rawCount) {
+            const num = parseInt(rawCount, 10);
+            let formatted = '';
+            if (num >= 1000000) {
+              formatted = `${(num / 1000000).toFixed(1)}M vistas`;
+            } else if (num >= 1000) {
+              formatted = `${(num / 1000).toFixed(1)}K vistas`;
+            } else {
+              formatted = `${num} vistas`;
+            }
+            setVideoViews((prev) => ({ ...prev, [video.id]: formatted }));
+          }
+        })
+        .catch((error) => console.error('Error fetching views for', video.id, error));
+    });
+  }, []);
+
 
   const handleScroll = (direction) => {
     const container = carouselRef.current;
@@ -102,16 +137,20 @@ export default function YouTube() {
 
         <div className="youtube-carousel-wrapper fade-in fade-in-delay-3">
           <div className="youtube-carousel" ref={carouselRef}>
-            {FEATURED_VIDEOS.map((video, index) => (
+            {FEATURED_VIDEOS.map((video) => (
               <a
                 key={video.id}
-                href="https://www.youtube.com/@ERIKbouns"
+                href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="youtube-card carousel-card"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveVideoId(video.youtubeId);
+                }}
               >
                 <div className="youtube-card-thumb">
-                  <img src={video.image} alt={video.title} loading="lazy" />
+                  <img src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`} alt={video.title} loading="lazy" />
                   <span className="youtube-card-badge">{video.category}</span>
                   <div className="youtube-card-play">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
@@ -121,7 +160,7 @@ export default function YouTube() {
                 </div>
                 <div className="youtube-card-body">
                   <h3 className="youtube-card-title">{video.title}</h3>
-                  <p className="youtube-card-meta">ErikBouns -- {video.views}</p>
+                  <p className="youtube-card-meta">ErikBouns -- {videoViews[video.id] || video.views}</p>
                 </div>
               </a>
             ))}
@@ -142,6 +181,25 @@ export default function YouTube() {
           </a>
         </div>
       </div>
+
+      {activeVideoId && (
+        <div className="video-lightbox" onClick={() => setActiveVideoId(null)}>
+          <div className="video-lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <button className="video-lightbox-close" onClick={() => setActiveVideoId(null)} aria-label="Cerrar reproductor">
+              &times;
+            </button>
+            <div className="video-lightbox-iframe-wrapper">
+              <iframe
+                src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

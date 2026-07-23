@@ -96,6 +96,7 @@ export default function Contact() {
     type: '',
     message: '',
   });
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success'
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -103,14 +104,32 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setStatus('sending');
+
     const mailtoSubject = encodeURIComponent(
       `[${formData.type || 'General'}] ${formData.subject}`
     );
     const mailtoBody = encodeURIComponent(
       `Nombre: ${formData.name}\nEmail: ${formData.email}\nTipo: ${formData.type}\n\nMensaje:\n${formData.message}`
     );
-    window.location.href = `mailto:erikbouns.negocios@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+    setTimeout(() => {
+      window.location.href = `mailto:erikbouns.negocios@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+      setStatus('success');
+      
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          type: '',
+          message: '',
+        });
+        setStatus('idle');
+      }, 3000);
+    }, 1000);
   };
+
 
   return (
     <section className="section contact-section" id="contacto">
@@ -223,10 +242,37 @@ export default function Contact() {
                 />
               </div>
 
-              <button type="submit" className="btn-submit" id="contact-submit">
-                <SendIcon />
-                Enviar Mensaje
+              {status === 'success' && (
+                <div className="contact-success-alert" style={{
+                  background: 'rgba(59, 130, 246, 0.1)',
+                  border: '1px solid var(--color-accent)',
+                  color: '#ffffff',
+                  padding: '0.85rem',
+                  borderRadius: '10px',
+                  marginBottom: '1.25rem',
+                  fontSize: '0.875rem',
+                  textAlign: 'center'
+                }}>
+                  Mensaje validado. Por favor, finaliza el envio en tu gestor de correo que se acaba de abrir.
+                </div>
+              )}
+
+              <button 
+                type="submit" 
+                className="btn-submit" 
+                id="contact-submit" 
+                disabled={status !== 'idle'}
+              >
+                {status === 'idle' && (
+                  <>
+                    <SendIcon />
+                    Enviar Mensaje
+                  </>
+                )}
+                {status === 'sending' && 'Validando y abriendo correo...'}
+                {status === 'success' && '¡Mensaje estructurado!'}
               </button>
+
             </form>
           </div>
         </div>
