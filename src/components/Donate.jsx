@@ -46,7 +46,7 @@ export default function Donate() {
               </div>
               <h3>Patreon / Apoyo Mensual</h3>
               <p>Acceso anticipado a videos, menciones especiales y canal de Discord exclusivo.</p>
-              <a href="https://www.youtube.com/@ERIKbouns" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+              <a href="https://www.paypal.com/paypalme/erikbouns" target="_blank" rel="noopener noreferrer" className="btn-secondary">
                 Ser Patron
               </a>
             </div>
@@ -73,6 +73,7 @@ export default function Donate() {
               </a>
             </div>
           </div>
+
         </div>
       </div>
     </section>
