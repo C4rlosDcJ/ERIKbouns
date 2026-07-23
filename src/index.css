@@ -5,22 +5,23 @@
 
 /* --- CSS Variables --- */
 :root {
-  --color-bg: #070709;
-  --color-bg-alt: #0e1015;
-  --color-card: #13161c;
-  --color-card-hover: #1a1e26;
+  --color-bg: #030712;
+  --color-bg-alt: #0b132b;
+  --color-card: #0f172a;
+  --color-card-hover: #1e293b;
   
   --color-text: #ffffff;
   --color-text-sub: #dce1eb;
   --color-text-muted: #9aa2b4;
 
 
-  --color-accent: #c8ff00;
-  --color-accent-dim: rgba(200, 255, 0, 0.12);
-  --color-accent-glow: rgba(200, 255, 0, 0.25);
+  --color-accent: #3b82f6;
+  --color-accent-dim: rgba(59, 130, 246, 0.12);
+  --color-accent-glow: rgba(59, 130, 246, 0.25);
 
   --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(200, 255, 0, 0.3);
+  --color-border-hover: rgba(59, 130, 246, 0.3);
+
 
   --color-youtube: #ff0000;
   --color-facebook: #1877f2;
@@ -173,6 +174,11 @@ img {
   color: var(--color-accent);
 }
 
+.navbar-sublinks {
+  display: none;
+}
+
+
 
 /* Dropdown */
 .navbar-dropdown-wrapper {
@@ -230,7 +236,7 @@ img {
 
 .navbar-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(200, 255, 0, 0.4);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
 
 .navbar-toggle {
@@ -307,8 +313,8 @@ img {
   align-items: center;
   gap: 0.5rem;
   padding: 0.4rem 1rem;
-  background: rgba(200, 255, 0, 0.08);
-  border: 1px solid rgba(200, 255, 0, 0.2);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: var(--radius-full);
   font-size: 0.75rem;
   font-weight: 700;
@@ -371,12 +377,12 @@ img {
 }
 
 .btn-glow {
-  box-shadow: 0 0 25px rgba(200, 255, 0, 0.3);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
 }
 
 .btn-glow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(200, 255, 0, 0.5);
+  box-shadow: 0 0 35px rgba(59, 130, 246, 0.5);
 }
 
 .btn-secondary {
@@ -458,8 +464,10 @@ img {
 }
 
 .about-highlight-item:hover {
-  border-color: var(--color-border-hover);
-  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  background: var(--color-accent-dim);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
 }
 
 .about-highlight-icon {
@@ -770,6 +778,8 @@ img {
 .onefix-service-card:hover {
   border-color: var(--color-accent);
   background: var(--color-accent-dim);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
 }
 
 .onefix-service-icon {
@@ -797,7 +807,7 @@ img {
 
 .donate-card {
   padding: 3.5rem 2rem;
-  background: radial-gradient(circle at 50% 0%, rgba(200, 255, 0, 0.05) 0%, rgba(19, 22, 28, 0.8) 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.05) 0%, rgba(15, 23, 42, 0.8) 70%);
   border: 1px solid var(--color-border);
   border-radius: 28px;
   text-align: center;
@@ -828,7 +838,7 @@ img {
 
 .donate-option-card.highlighted {
   border-color: var(--color-accent);
-  background: rgba(200, 255, 0, 0.04);
+  background: rgba(59, 130, 246, 0.04);
 }
 
 .donate-option-card:hover {
@@ -1127,7 +1137,7 @@ img {
   color: var(--color-bg);
   background: var(--color-accent);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(200, 255, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
 }
 
 
@@ -1200,12 +1210,12 @@ img {
   justify-content: center;
   gap: 0.5rem;
   transition: all 0.2s ease;
-  box-shadow: 0 0 25px rgba(200, 255, 0, 0.3);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
 }
 
 .btn-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(200, 255, 0, 0.5);
+  box-shadow: 0 0 35px rgba(59, 130, 246, 0.5);
 }
 
 /* --- Footer --- */
@@ -1314,11 +1324,23 @@ img {
   100% { transform: scale(1.35); opacity: 0; }
 }
 
-/* --- Fade In Observer Fallback --- */
+/* --- Fade In Observer Styles --- */
 .fade-in {
-  opacity: 1;
-  transform: none;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+
 
 /* --- Mobile Responsiveness --- */
 @media (max-width: 992px) {

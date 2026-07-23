@@ -68,26 +68,26 @@ export default function About() {
           </div>
 
           <div className="about-visual fade-in fade-in-delay-2">
-            <div className="about-visual-card">
-              <div className="about-visual-inner">
-                <div className="about-visual-logo">
-                  <div className="about-visual-logo-text">
-                    <span className="about-visual-logo-erik">ERIK</span>
-                    <span className="about-visual-logo-bouns">bouns</span>
-                  </div>
-                  <div className="about-visual-logo-tagline">
-                    Tech Content Creator
-                  </div>
-                  <div className="about-visual-logo-year">Est. 2013</div>
-                </div>
+            <div className="about-visual-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div className="about-visual-inner" style={{ marginBottom: '1.5rem' }}>
+                <img src="/logo.png" alt="ERIKbouns Logo" style={{ width: '120px', height: '120px', borderRadius: '24px', boxShadow: '0 12px 30px rgba(0,0,0,0.5)', objectFit: 'cover' }} />
               </div>
-
+              
+              <div className="about-visual-logo-text" style={{ fontSize: '2.25rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#ffffff' }}>
+                ERIK<span style={{ color: 'var(--color-accent)' }}>bouns</span>
+              </div>
+              <div className="about-visual-logo-tagline" style={{ marginTop: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '0.75rem', fontWeight: '600', color: '#c4cbd9' }}>
+                Tech Content Creator
+              </div>
+              <div className="about-visual-logo-year" style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-accent)', marginTop: '0.25rem' }}>Est. 2013</div>
+              
               <div className="about-visual-badge">
                 <h4>Creador de Contenido</h4>
                 <p>Tecnologia -- Informatica -- Entretenimiento</p>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

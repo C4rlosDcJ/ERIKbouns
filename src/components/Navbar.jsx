@@ -31,9 +31,11 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} id="navbar">
       <div className="container navbar-inner">
-        <a href="#" className="navbar-logo">
-          ERIK<span>bouns</span>
+        <a href="#" className="navbar-logo" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.65rem' }}>
+          <img src="/logo.png" alt="ERIKbouns logo" style={{ height: '32px', width: '32px', borderRadius: '8px', objectFit: 'cover' }} />
+          <span>ERIK<span style={{ color: 'var(--color-accent)' }}>bouns</span></span>
         </a>
+
 
         <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
           <a href="#inicio" onClick={(e) => handleNavClick(e, 'inicio')}>INICIO</a>

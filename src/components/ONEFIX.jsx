@@ -104,10 +104,16 @@ export default function ONEFIX() {
             </div>
 
             <div className="onefix-actions fade-in fade-in-delay-4">
-              <a href="#contacto" className="btn-primary btn-glow">
+              <a 
+                href="https://onefix-three.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-primary btn-glow"
+              >
                 Solicitar Cotizacion de Reparacion
               </a>
             </div>
+
           </div>
         </div>
       </div>

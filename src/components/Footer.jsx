@@ -37,9 +37,11 @@ export default function Footer() {
     <footer className="footer" id="footer">
       <div className="container footer-inner">
         <div>
-          <div className="footer-brand">
-            ERIK<span>bouns</span>
+          <div className="footer-brand" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.65rem' }}>
+            <img src="/logo.png" alt="ERIKbouns logo" style={{ height: '28px', width: '28px', borderRadius: '6px', objectFit: 'cover' }} />
+            <span>ERIK<span style={{ color: 'var(--color-accent)' }}>bouns</span></span>
           </div>
+
           <p className="footer-copy">
             Tecnologia y Entretenimiento. {currentYear}
           </p>
