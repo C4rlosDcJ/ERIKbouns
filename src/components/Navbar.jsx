@@ -41,13 +41,8 @@ export default function Navbar() {
           <a href="#inicio" onClick={(e) => handleNavClick(e, 'inicio')}>INICIO</a>
           <a href="#sobre-mi" onClick={(e) => handleNavClick(e, 'sobre-mi')}>SOBRE MI</a>
           
-          <div className="navbar-mobile-dropdown">
-            <a href="#youtube" onClick={(e) => handleNavClick(e, 'youtube')}>YOUTUBE</a>
-            <div className="navbar-sublinks">
-              <a href="#marcas" onClick={(e) => handleNavClick(e, 'marcas')}>- Colaboraciones</a>
-              <a href="#marcas" onClick={(e) => handleNavClick(e, 'marcas')}>- Menciones</a>
-            </div>
-          </div>
+          <a href="#youtube" onClick={(e) => handleNavClick(e, 'youtube')}>YOUTUBE</a>
+
 
           <a href="#onefix" onClick={(e) => handleNavClick(e, 'onefix')}>ONEFIX</a>
           <a href="#donar" onClick={(e) => handleNavClick(e, 'donar')}>DONAR</a>

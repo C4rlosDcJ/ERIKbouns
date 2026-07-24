@@ -168,7 +168,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="fade-in fade-in-delay-2">
+          <div className="contact-form-container fade-in fade-in-delay-2">
             <form className="contact-form" onSubmit={handleSubmit} id="contact-form">
               <div className="contact-form-row">
                 <div className="contact-form-group">

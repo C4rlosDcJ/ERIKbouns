@@ -1071,6 +1071,12 @@ img {
   gap: 3.5rem;
 }
 
+@media (min-width: 993px) {
+  .contact-form-container {
+    padding-top: 3.5rem;
+  }
+}
+
 .contact-channels {
   display: flex;
   flex-direction: column;
