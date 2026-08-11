@@ -39,7 +39,7 @@ export default function Navbar() {
 
         <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
           <a href="#inicio" onClick={(e) => handleNavClick(e, 'inicio')}>INICIO</a>
-          <a href="#sobre-mi" onClick={(e) => handleNavClick(e, 'sobre-mi')}>SOBRE MI</a>
+          <a href="#sobre-nosotros" onClick={(e) => handleNavClick(e, 'sobre-nosotros')}>SOBRE NOSOTROS</a>
           
           <a href="#youtube" onClick={(e) => handleNavClick(e, 'youtube')}>YOUTUBE</a>
 

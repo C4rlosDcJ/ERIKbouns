@@ -1,18 +1,18 @@
 export default function About() {
   return (
-    <section className="section" id="sobre-mi">
+    <section className="section" id="sobre-nosotros">
       <div className="container">
         <div className="about-grid">
           <div className="about-content">
             <div>
-              <span className="section-label fade-in">Sobre Mi</span>
+              <span className="section-label fade-in">Sobre Nosotros</span>
               <h2 className="section-title fade-in fade-in-delay-1">
                 Tecnologia con<br />perspectiva real.
               </h2>
             </div>
 
             <p className="about-text fade-in fade-in-delay-2">
-              Soy ErikBouns, creador de contenido especializado en tecnologia, 
+              Somos ErikBouns, creadores de contenido especializados en tecnologia, 
               informatica y entretenimiento desde 2013. Lo que empezo como un 
               proyecto personal se transformo en una plataforma de contenido de 
               alta calidad: reviews detallados, unboxings honestos, tutoriales 
@@ -20,8 +20,8 @@ export default function About() {
             </p>
 
             <p className="about-text fade-in fade-in-delay-2">
-              Con el paso de los años, mi pasion por la tecnologia me llevo a 
-              reparar equipos, y de ahi nacio <strong>ONEFIX</strong> -- mi marca 
+              Con el paso de los años, nuestra pasion por la tecnologia nos llevo a 
+              reparar equipos, y de ahi nacio <strong>ONEFIX</strong> -- nuestra marca 
               dedicada a la reparacion tecnologica que respalda cada opinion 
               y recomendacion con años de experiencia real tocando hardware.
             </p>

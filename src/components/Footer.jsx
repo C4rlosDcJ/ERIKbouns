@@ -49,7 +49,7 @@ export default function Footer() {
 
         <div className="footer-links">
           <a href="#inicio">INICIO</a>
-          <a href="#sobre-mi">SOBRE MI</a>
+          <a href="#sobre-nosotros">SOBRE NOSOTROS</a>
           <a href="#youtube">YOUTUBE</a>
           <a href="#onefix">ONEFIX</a>
           <a href="#donar">DONAR</a>
